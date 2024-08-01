@@ -5,5 +5,3 @@ Integrantes
   - Alejandro Restrepo López
   - Kevin Javier Aguilar Román
   - Ricardo Jesus Ortega
-
-:)
