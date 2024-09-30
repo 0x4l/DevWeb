@@ -1,3 +1,4 @@
+// src/components/Comments.js
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc, query, onSnapshot, orderBy } from 'firebase/firestore';

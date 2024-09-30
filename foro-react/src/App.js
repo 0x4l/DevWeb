@@ -3,8 +3,7 @@ import './App.css';
 import AuthForm from './components/AuthForm';
 import Forum from './components/Forum';
 import newLogo from './components/assets/logo.png';
-import { auth } from './firebase';
-import { signOut } from 'firebase/auth';
+import { auth } from './firebase'; // Mantenemos solo la importación de 'auth'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 function App() {
