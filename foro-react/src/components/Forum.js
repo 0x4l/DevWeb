@@ -9,7 +9,7 @@ function Forum({ user }) {
   const [thread, setThread] = useState('');
   const [threads, setThreads] = useState([]);
 
-  // Cargar los hilos del foro desde Firestore
+ 
   useEffect(() => {
     const q = query(collection(db, 'threads'), orderBy('createdAt', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -23,7 +23,7 @@ function Forum({ user }) {
     return () => unsubscribe();
   }, []);
 
-  // Manejar la creación de un nuevo hilo
+ 
   const handleAddThread = async (e) => {
     e.preventDefault();
     if (title.trim() === '' || thread.trim() === '') {
