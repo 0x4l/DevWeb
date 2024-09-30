@@ -1,0 +1,400 @@
+/* Nueva barra superior */
+.top-bar {
+  background: rgb(1,32,52);
+  background: linear-gradient(177deg, rgba(1,32,52,1) 30%, rgba(2,75,77,1) 60%);
+  width: 100%; /* Ocupa todo el ancho de la pantalla */
+  padding: 5px 0; /* Reduce el padding superior e inferior */
+  text-align: center;
+  z-index: 1000; /* Para asegurarse de que quede encima del contenido */
+  position: fixed; /* Para que se mantenga en la parte superior de la pantalla */
+  top: 0;
+  left: 0;
+}
+
+/* Estilo del título en la barra superior */
+.top-bar-title {
+  font-size: 1.5rem;
+  color: white;
+  margin: 0;
+}
+
+/* Contenedor de los íconos sociales */
+.social-icons {
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+  margin-bottom: 0px;
+}
+
+.social-icons a {
+  color: rgb(4, 120, 104); /* Cambia según el estilo deseado */
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #000; /* Cambia el color al pasar el mouse */
+}
+
+/* Contenedor de título y logo */
+.banner-logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0px;
+}
+
+/* Estilos para la imagen del logo */
+.logo-container {
+  margin-right: 20px;
+}
+
+.logo-img {
+  width: 150px; /* Ajusta el tamaño de la imagen según tu preferencia */
+  height: auto;
+}
+
+/* Estilos para el título grande centrado */
+.title-connectdea {
+  font-size: 2.5rem;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  margin: 0;
+}
+
+/* Banner */
+.banner {
+  height: 400px;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  margin-bottom: -80px;
+  margin-top: -45px; /* Espacio para la barra superior */
+}
+
+.banner h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #000;
+}
+
+.banner p {
+  font-size: 1.2rem;
+  color: #000;
+}
+
+/* Contenedor general que agrupa botones y buscador */
+.banner-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0px;
+}
+
+/* Recuadro para los botones con bordes redondeados y negros */
+.banner-buttons-container {
+  width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+/* Estilos para los botones */
+.banner-buttons {
+  list-style-type: none;
+  padding: 10;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-left: -55px;
+  position: relative;
+  z-index: 100 ; /* Asegúrate de que sea mayor que el del carrusel */
+}
+
+.banner-buttons li {
+  display: inline-block;
+  width: 100%; /* Cada botón ocupa toda la fila */
+  border-bottom: 2px solid black; /* Línea continua debajo del botón */
+  margin-bottom: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: black; /* Cambia el color del texto a negro para que se vea */
+  background-color: #e0e0e0; /* Fondo claro para el botón */
+}
+
+.banner-buttons li:hover {
+  background-color: rgba(0, 128, 0, 0.2); /* Color al pasar mouse */
+}
+
+/* Estilos para el recuadro del buscador con borde negro */
+.search-box-container {
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #ccc; /* Borde gris claro */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+/* Ocultar el buscador inicialmente */
+.search-box {
+  display: none; /* Oculto inicialmente */
+  flex-direction: row;
+  transition: max-height 0.3s ease-in-out; /* Animación suave */
+  overflow: hidden; /* Evita que se muestre el contenido fuera de los límites */
+}
+
+.search-box.show {
+  display: flex; /* Mostrar cuando se activa */
+  max-height: 100px; /* Ajusta a un tamaño máximo */
+}
+
+
+.search-input {
+  border: 1px solid #007BFF; /* Borde azul */
+  padding: 10px;
+  border-radius: 20px; /* Bordes más redondeados */
+  outline: none;
+  width: 250px; /* Un poco más ancho */
+  transition: border-color 0.3s; /* Transición suave al enfocar */
+}
+
+.search-input:focus {
+  border-color: #0056b3; /* Color más oscuro al enfocar */
+}
+
+
+/* Estilos del botón de búsqueda */
+.search-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+}
+
+.search-results {
+    position: relative; /* Para superponerse al carrusel */
+    z-index: 10; /* Asegurarse de que esté por encima */
+    background-color: white; /* Fondo blanco */
+    padding: 10px; /* Espaciado */
+    margin-bottom: 20px; /* Margen inferior */
+}
+
+
+/* Estilo para el título de novedades con efecto neón y animación de aparición */
+.novedades-carrusel h2 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgba(0, 255, 153, 1); /* Color inicial que permite ver el efecto de neón */
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  position: relative;
+  opacity: 0; /* Comienza invisible para la animación de aparición */
+  animation: neon-flicker 1.5s infinite alternate, fadeIn 1s forwards; /* Combina ambas animaciones */
+}
+
+
+/* Animación de aparición */
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Comienza invisible */
+    transform: translateY(-20px); /* Se desplaza hacia arriba */
+  }
+  to {
+    opacity: 1; /* Se vuelve visible */
+    transform: translateY(0); /* Vuelve a la posición original */
+  }
+}
+
+/* Aplicar la animación de aparición al contenedor de novedades */
+.novedades-carrusel {
+  animation: fadeIn 1s forwards; /* Agrega la animación de aparición */
+  opacity: 0; /* Comienza invisible para la animación de aparición */
+}
+
+
+/* Aplicar la animación de aparición al contenedor de novedades */
+.novedades-carrusel {
+  animation: fadeIn 1s forwards; /* Agrega la animación de aparición */
+  opacity: 0; /* Comienza invisible para la animación de aparición */
+}
+
+/* Estilos de carrusel */
+.novedades-carrusel {
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+
+
+.novedades-carrusel h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out forwards;
+  opacity: 0; /* Comienza invisible */
+}
+
+.carousel {
+  position: relative;
+  width: 100%; /* Ocupa todo el ancho de la pantalla */
+  height: 200px; /* Ajusta esta altura según lo necesario */
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1.5s ease-in-out forwards;
+  opacity: 0; /* Comienza invisible */
+  animation-delay: 0.5s; /* Retardo para que aparezca después del título */
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.3s ease-in-out; /* Reducción a 0.3s */
+}
+
+.carousel-item {
+  min-width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.carousel img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover; /* Asegura que las imágenes ocupen todo el espacio del carrusel */
+  object-position: center; /* Centra la imagen dentro del contenedor */
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%; /* Botones redondos */
+  padding: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 1;
+  transition: background-color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+/* Efecto al pasar el mouse */
+.carousel-button:hover {
+  background-color: rgba(0, 128, 0, 0.9); /* Cambia el color al pasar el mouse */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Aumenta la sombra */
+}
+
+.news-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.news-button {
+  background-color: #e0e0e0; /* Fondo claro */
+  border: none;
+  border-radius: 50%; /* Bordes redondeados */
+  width: 40px; /* Ajusta el tamaño */
+  height: 40px; /* Ajusta el tamaño */
+  margin: 0 5px; /* Espaciado entre botones */
+  cursor: pointer;
+  transition: background-color 0.3s; /* Transición suave */
+  font-size: 1.2rem; /* Tamaño del texto */
+}
+
+.news-button:hover {
+  background-color: rgba(0, 128, 0, 0.5); /* Color al pasar mouse */
+}
+
+/* Sección de noticias */
+.noticias {
+  padding: 20px;
+}
+
+.news-layout {
+  display: flex; /* Usamos flexbox para alinear los elementos */
+  justify-content: space-between; /* Espaciado entre las columnas */
+}
+
+.news-cards {
+  width: 50%; /* Ocupa el 50% del ancho del contenedor */
+}
+
+.news-row {
+  display: flex; /* Usamos flexbox para alinear las cartas en fila */
+  justify-content: space-between; /* Espaciado entre las cartas */
+  margin-bottom: 20px; /* Espaciado entre filas */
+}
+
+.news-card {
+  background-color: #f9f9f9; /* Fondo de las cartas */
+  border: 1px solid #ccc; /* Borde de las cartas */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 10px; /* Espaciado interno */
+  width: 48%; /* Ocupa casi la mitad del ancho de la fila */
+}
+
+.image-container {
+  width: 30%; /* Ancho para el espacio de la imagen */
+}
+
+.news-image {
+  width: 100%; /* Imagen ocupa todo el ancho del contenedor */
+  border-radius: 8px; /* Bordes redondeados de la imagen */
+}
+
+.info-box {
+  width: 18%; /* Ancho para el recuadro de información */
+  background-color: #e0f7fa; /* Color de fondo del recuadro */
+  border: 1px solid #80deea; /* Borde del recuadro */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 10px; /* Espaciado interno */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo del footer */
+.footer {
+  background-color: #333; /* Un gris oscuro */
+  color: white;
+  text-align: center;
+  padding: 20px 0; /* Espacio alrededor */
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-family: 'Arial', sans-serif; /* Fuente */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+}
+
+.footer-content {
+  max-width: 1200px; /* Ancho máximo */
+  margin: 0 auto; /* Centrar contenido */
+  padding: 0 20px; /* Espacio lateral */
+}

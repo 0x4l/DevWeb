@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnecTdea</title>
+    <link rel="stylesheet" href="/styles/index.css">
+
+    <!-- Añadimos Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Banner con botones en listas y buscador -->
+    <header class="banner">
+
+        <!-- Barra superior -->
+        <div class="top-bar">
+            <h2 class="top-bar-title">ConnecTdea</h2>
+        </div>
+
+        <!-- Íconos de redes sociales -->
+        <div class="social-icons">
+            <a href="https://web.facebook.com/tecdeantioquia" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/tecnologicodeantioquia/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@tdeatv" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <div class="banner-logo-title">
+            <!-- Imagen al lado izquierdo -->
+            <div class="logo-container">
+                <img src="/images/images.png" alt="Logo" class="logo-img">
+            </div>
+
+            <!-- Título grande centrado -->
+            <h1 class="title-connectdea">ConnecTdea</h1>
+        </div>
+
+        <div class="banner-content">
+            <!-- Recuadro con botones como listas -->
+            <div class="banner-buttons-container">
+                <ul class="banner-buttons">
+                    <li data-link="https://campus.tdea.edu.co/cas/login?service=https%3A%2F%2Fcampus.tdea.edu.co%2Fextranet%2Fenter.do">Campus</li>
+                    <li data-link="https://www.tdea.edu.co/index.php/conoce/institucional/atencion-al-usuario/186-tdea/valla-virtual-2/3337-conocenos">Conocenos</li>
+                    <li data-link="https://inscripcionestdea.com">Programas</li>
+                    <li data-link="https://www.tdea.edu.co/index.php/micrositios/admisiones-y-registro">Admisiones</li>
+                    <li data-link="https://www.tdea.edu.co/index.php/planta-docente">Docentes</li>
+                    <li data-link="https://www.tdea.edu.co/index.php/blog/estudiantes">Estudiantes</li>
+                    <li data-link="https://www.tdea.edu.co/index.php/conoce/institucional/atencion-al-usuario">Ayuda</li>
+                    <li data-link="https://www.tdea.edu.co/index.php/conoce/institucional/atencion-al-usuario/atencion-al-usuario/186-tdea/valla-virtual-2#:~:text=Línea%20Nacional%20Gratuita%20018000519535.">Contacto</li>
+                    <li class="search-icon">
+                        <button type="button" class="search-button">
+                            <i class="fas fa-search"></i> <!-- Icono de lupa de Font Awesome -->
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <!-- Recuadro con el buscador -->
+            <div class="search-box-container">
+                <form class="search-box">
+                    <input type="text" placeholder="Buscar..." class="search-input">
+                </form>
+            </div>            
+        </div>
+    </header>
+
+
+<!-- Sección de NOVEDADES Carrusel -->
+<section class="novedades-carrusel" id="novedades-carrusel">
+    <h2>NOVEDADES</h2>
+    <div class="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/images/Carrusel/Evento 1/Photo + Text Page.png" alt="Evento 1">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/Carrusel/Evento 2/Photo + Text Page.png" alt="Evento 2">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/Carrusel/Evento 3/Banner Torneo de Boxeo Diseño Deportivo Atrevido Negro Rojo.png" alt="Evento 3">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/Carrusel/Evento 4/Blue and White Futuristic AI Technology Banner.png" alt="Evento 4">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/Carrusel/Evento 5/Purple & Black Retro Gaming Banner.png" alt="Evento 5">
+            </div>
+        </div>
+        <button class="carousel-button prev" onclick="prevSlide()">&#10094;</button>
+        <button class="carousel-button next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <!-- Nuevos botones para cambiar de noticias -->
+    <div class="news-navigation">
+        <button class="news-button" onclick="showSlide(0)">1</button>
+        <button class="news-button" onclick="showSlide(1)">2</button>
+        <button class="news-button" onclick="showSlide(2)">3</button>
+        <button class="news-button" onclick="showSlide(3)">4</button>
+        <button class="news-button" onclick="showSlide(4)">5</button>
+    </div>
+
+
+
+</section>
+
+
+
+<!-- Sección de Noticias -->
+<section class="noticias" id="noticias">
+    <h2>Últimas Noticias</h2>
+    <div class="news-layout">
+        <!-- Cartas de noticias a la izquierda -->
+        <div class="news-cards">
+            <div class="news-row">
+                <div class="news-card">
+                    <h3>Inscripción Tdea Gamer</h3>
+                    <p>Participa en nuestro emocionante torneo de videojuegos. Regístrate ahora y compite con los mejores jugadores.</p>
+                </div>
+                <div class="news-card">
+                    <h3>Inscripción Curso de IA</h3>
+                    <p>Apúntate a nuestro nuevo curso de Inteligencia Artificial. Aprende de los expertos y adquiere habilidades valiosas.</p>
+                </div>
+            </div>
+            <div class="news-row">
+                <div class="news-card">
+                    <h3>50% de Descuento en la Tienda Tdea</h3>
+                    <p>No te pierdas esta increíble oferta. Aprovecha el 50% de descuento en todos los productos disponibles en nuestra tienda.</p>
+                </div>
+                <div class="news-card">
+                    <h3>RIN DE BOXEO</h3>
+                    <p>¡Únete a nuestras clases de boxeo! Inscríbete y entrena con los mejores. ¡Desarrolla tus habilidades y mantente en forma!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Espacio para la imagen -->
+        <div class="image-container">
+            <img src="/images/jornadas_2024_1.jpg" alt="Descripción de la imagen" class="news-image">
+        </div>
+
+        <!-- Recuadro a la derecha -->
+        <div class="info-box">
+            <h3>SECCION PARA AGREGAR LOS ULTIMOS MENSAJES DEL FORO</h3>
+            <p>Aquí puedes añadir información adicional relacionada con las noticias.</p>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2024 ConnecTdea. Todos los derechos reservados.</p>
+        <div class="social-icons">
+            <a href="https://web.facebook.com/tecdeantioquia" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/tecnologicodeantioquia/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@tdeatv" target="_blank" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="/js/index.js"></script>
+</body>
+
+</html>
