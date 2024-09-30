@@ -1,99 +1,89 @@
-import React, { useEffect, useState } from 'react';
-import { collection, addDoc, getDocs, orderBy, query } from 'firebase/firestore';
-import { auth, db } from '../firebase'; 
-import { useAuthState } from 'react-firebase-hooks/auth'; 
+import React, { useState, useEffect } from 'react';
+import { db } from '../firebase';
+import { collection, addDoc, query, onSnapshot, orderBy } from 'firebase/firestore';
 import Comments from './Comments';
+import './Forum.css';
 
-function Forum() {
+function Forum({ user }) {
+  const [title, setTitle] = useState('');
+  const [thread, setThread] = useState('');
   const [threads, setThreads] = useState([]);
-  const [newThreadTitle, setNewThreadTitle] = useState('');
-  const [newThreadContent, setNewThreadContent] = useState('');
-  const [user] = useAuthState(auth); 
 
- 
-  const loadThreads = async () => {
-    try {
-      const q = query(collection(db, 'threads'), orderBy('createdAt', 'desc'));
-      const querySnapshot = await getDocs(q);
-      const threadsData = querySnapshot.docs.map((doc) => ({
+  // Cargar los hilos del foro desde Firestore
+  useEffect(() => {
+    const q = query(collection(db, 'threads'), orderBy('createdAt', 'desc'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const threadsData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setThreads(threadsData);
-    } catch (error) {
-      console.error('Error loading threads: ', error);
-    }
-  };
+    });
 
-  useEffect(() => {
-    loadThreads(); 
+    return () => unsubscribe();
   }, []);
 
-  
-  const createThread = async () => {
-    if (!newThreadTitle || !newThreadContent) {
+  // Manejar la creación de un nuevo hilo
+  const handleAddThread = async (e) => {
+    e.preventDefault();
+    if (title.trim() === '' || thread.trim() === '') {
       alert('Por favor, llena ambos campos para crear un nuevo hilo.');
-      return;
-    }
-    if (!user) {
-      alert('Debes iniciar sesión para crear un hilo.');
       return;
     }
 
     try {
       await addDoc(collection(db, 'threads'), {
-        title: newThreadTitle,
-        content: newThreadContent,
-        createdBy: user.displayName || user.email, 
+        title: title,
+        thread: thread,
+        user: user ? user.email : 'Anon',
         createdAt: new Date(),
       });
-      setNewThreadTitle('');
-      setNewThreadContent('');
-      loadThreads(); 
+      setTitle('');
+      setThread('');
     } catch (error) {
-      console.error('Error creating thread: ', error);
+      console.error('Error al crear hilo:', error);
+      alert(error.message);
     }
   };
 
   return (
-    <div>
-      <h2>Foro</h2>
-
-      {user ? (
-        <div>
-          <input
-            type="text"
-            placeholder="Título del hilo"
-            value={newThreadTitle}
-            onChange={(e) => setNewThreadTitle(e.target.value)}
-          />
-          <textarea
-            placeholder="Contenido del hilo"
-            value={newThreadContent}
-            onChange={(e) => setNewThreadContent(e.target.value)}
-          />
-          <button onClick={createThread}>Crear hilo</button>
+    <div className="forum">
+      {user && (
+        <div className="new-thread-form">
+          <h2>Crear un nuevo hilo</h2>
+          <form onSubmit={handleAddThread}>
+            <input
+              type="text"
+              placeholder="Título del hilo"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+            <textarea
+              placeholder="Escribe tu hilo aquí..."
+              value={thread}
+              onChange={(e) => setThread(e.target.value)}
+              required
+            ></textarea>
+            <button className="submit-button" type="submit">Publicar hilo</button>
+          </form>
         </div>
-      ) : (
-        <p>Por favor, inicia sesión para crear un nuevo hilo.</p>
       )}
 
-      <div>
-        <h3>Hilos</h3>
-        {threads.length > 0 ? (
-          <ul>
-            {threads.map((thread) => (
-              <li key={thread.id}>
-                <h4>{thread.title}</h4>
-                <p>{thread.content}</p>
-                <p><strong>Creado por:</strong> {thread.createdBy}</p>
-                {}
-                <Comments threadId={thread.id} />
-              </li>
-            ))}
-          </ul>
+      <div className="thread-list">
+        <h2>Foro</h2>
+        {threads.length === 0 ? (
+          <p>No hay hilos disponibles.</p>
         ) : (
-          <p>No hay hilos en el foro todavía.</p>
+          threads.map((thread) => (
+            <div className="thread-card" key={thread.id}>
+              <h3>{thread.title}</h3>
+              <p>{thread.thread}</p>
+              <small>Por: {thread.user}</small>
+              {/* Integrar el componente de comentarios */}
+              <Comments threadId={thread.id} user={user} />
+            </div>
+          ))
         )}
       </div>
     </div>
