@@ -1,0 +1,58 @@
+/* src/components/Comments.css */
+
+.comments {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .comments h4 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .comment-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .comment-card p {
+    margin: 0;
+    color: #555;
+  }
+  
+  .comment-card small {
+    color: #888;
+  }
+  
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .comment-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 1rem;
+  }
+  
+  .comment-button {
+    padding: 8px 16px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .comment-button:hover {
+    background-color: #138496;
+  }
+  

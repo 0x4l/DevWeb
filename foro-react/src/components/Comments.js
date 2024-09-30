@@ -1,75 +1,76 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { collection, addDoc, getDocs, query, orderBy } from 'firebase/firestore';
-import { auth, db } from '../firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import React, { useState, useEffect } from 'react';
+import { db } from '../firebase';
+import { collection, addDoc, query, onSnapshot, orderBy } from 'firebase/firestore';
+import './Comments.css';
 
-function Comments({ threadId }) {
+function Comments({ threadId, user }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-  const [user] = useAuthState(auth); // Estado del usuario autenticado
 
-  const loadComments = useCallback(async () => {
-    try {
-      const q = query(collection(db, 'threads', threadId, 'comments'), orderBy('createdAt', 'desc'));
-      const querySnapshot = await getDocs(q);
-      const commentsData = querySnapshot.docs.map((doc) => doc.data());
+  // Cargar comentarios de un hilo específico
+  useEffect(() => {
+    const q = query(
+      collection(db, 'threads', threadId, 'comments'),
+      orderBy('createdAt', 'asc')
+    );
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const commentsData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setComments(commentsData);
-    } catch (error) {
-      console.error("Error loading comments: ", error);
-    }
+    });
+
+    return () => unsubscribe();
   }, [threadId]);
 
-  useEffect(() => {
-    loadComments();
-  }, [loadComments]);
-
-  // Función para agregar un nuevo comentario
-  const addComment = async () => {
-    if (!newComment) {
+  // Manejar la adición de un nuevo comentario
+  const handleAddComment = async (e) => {
+    e.preventDefault();
+    if (newComment.trim() === '') {
       alert('Por favor, escribe un comentario.');
-      return;
-    }
-    if (!user) {
-      alert('Debes iniciar sesión para comentar.');
       return;
     }
 
     try {
       await addDoc(collection(db, 'threads', threadId, 'comments'), {
         text: newComment,
-        createdBy: user.displayName || user.email, // Guardamos el nombre del usuario o el correo
+        user: user ? user.email : 'Anon',
         createdAt: new Date(),
       });
       setNewComment('');
-      loadComments(); // Recargar los comentarios después de agregar uno nuevo
     } catch (error) {
-      console.error('Error adding comment: ', error);
+      console.error('Error al agregar comentario:', error);
+      alert(error.message);
     }
   };
 
   return (
-    <div>
+    <div className="comments">
       <h4>Comentarios</h4>
-      <ul>
-        {comments.map((comment, index) => (
-          <li key={index}>
+      {comments.length === 0 ? (
+        <p>No hay comentarios aún.</p>
+      ) : (
+        comments.map((comment) => (
+          <div className="comment-card" key={comment.id}>
             <p>{comment.text}</p>
-            <p><strong>Por:</strong> {comment.createdBy}</p>
-          </li>
-        ))}
-      </ul>
+            <small>Por: {comment.user}</small>
+          </div>
+        ))
+      )}
 
       {user ? (
-        <div>
+        <form onSubmit={handleAddComment} className="comment-form">
           <textarea
-            placeholder="Escribe tu comentario"
+            placeholder="Escribe tu comentario..."
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
-          />
-          <button onClick={addComment}>Agregar comentario</button>
-        </div>
+            required
+          ></textarea>
+          <button type="submit" className="comment-button">Agregar Comentario</button>
+        </form>
       ) : (
-        <p>Por favor, inicia sesión para agregar un comentario.</p>
+        <p>Inicia sesión para agregar comentarios.</p>
       )}
     </div>
   );

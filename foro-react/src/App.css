@@ -5,12 +5,16 @@ body {
   color: #333;
 }
 
+.App {
+  text-align: center;
+}
+
 .App-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #282c34;
-  padding: 20px;
+  padding: 10px 20px;
   color: white;
   position: relative;
 }
@@ -26,24 +30,36 @@ body {
 }
 
 h1 {
-  font-size: 2.5rem;
-  color: #48eb42;
+  font-size: 2rem;
+  color: #61dafb;
   margin: 0;
 }
 
-.header-right {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+
+
+.profile {
+  text-align: left;
+  margin: 20px auto;
+  width: 80%;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.profile h2 {
+  font-size: 1.5rem;
+  color: #282c34;
+}
+
+.profile p {
+  font-size: 1.1rem;
+  color: #555;
 }
 
 .forum-container {
   width: 80%;
   margin: 20px auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 footer {
