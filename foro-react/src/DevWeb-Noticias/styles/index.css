@@ -398,19 +398,3 @@
   margin: 0 auto; /* Centrar contenido */
   padding: 0 20px; /* Espacio lateral */
 }
-
-.social-icons {
-  margin-top: 10px; /* Espacio entre el texto y los íconos */
-}
-
-.social-icons a {
-  margin: 0 15px; /* Espacio entre íconos */
-  color: white; /* Color de los íconos */
-  font-size: 24px; /* Tamaño de los íconos */
-  transition: transform 0.3s; /* Transición suave */
-}
-
-.social-icons a:hover {
-  transform: scale(1.2); /* Aumentar tamaño al pasar el mouse */
-}
-
