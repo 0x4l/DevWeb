@@ -11,12 +11,12 @@ function AuthForm() {
   const [isRegistering, setIsRegistering] = useState(false);
   const [user] = useAuthState(auth);
 
-  // Manejar el inicio de sesión
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setEmail(''); // Limpiar campos
+      setEmail(''); 
       setPassword('');
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
@@ -24,21 +24,21 @@ function AuthForm() {
     }
   };
 
-  // Manejar el registro y guardar perfil en Firestore
+ 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Guardar el perfil del usuario en Firestore
+      
       await setDoc(doc(db, 'users', user.uid), {
         uid: user.uid,
         email: user.email,
         createdAt: new Date(),
       });
 
-      setEmail(''); // Limpiar campos
+      setEmail(''); 
       setPassword('');
     } catch (error) {
       console.error('Error al registrarse:', error);
@@ -46,7 +46,7 @@ function AuthForm() {
     }
   };
 
-  // Manejar el cierre de sesión
+ 
   const handleLogout = async () => {
     try {
       await signOut(auth);

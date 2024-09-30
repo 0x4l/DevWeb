@@ -1,4 +1,4 @@
-// src/components/Comments.js
+
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc, query, onSnapshot, orderBy } from 'firebase/firestore';
@@ -8,7 +8,7 @@ function Comments({ threadId, user }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
 
-  // Cargar comentarios de un hilo específico
+  
   useEffect(() => {
     const q = query(
       collection(db, 'threads', threadId, 'comments'),
@@ -25,7 +25,7 @@ function Comments({ threadId, user }) {
     return () => unsubscribe();
   }, [threadId]);
 
-  // Manejar la adición de un nuevo comentario
+ 
   const handleAddComment = async (e) => {
     e.preventDefault();
     if (newComment.trim() === '') {
