@@ -6,7 +6,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 function Comments({ threadId }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-  const [user] = useAuthState(auth); // Estado del usuario autenticado
+  const [user] = useAuthState(auth); 
 
   const loadComments = useCallback(async () => {
     try {
@@ -23,7 +23,7 @@ function Comments({ threadId }) {
     loadComments();
   }, [loadComments]);
 
-  // Función para agregar un nuevo comentario
+  
   const addComment = async () => {
     if (!newComment) {
       alert('Por favor, escribe un comentario.');
@@ -37,11 +37,11 @@ function Comments({ threadId }) {
     try {
       await addDoc(collection(db, 'threads', threadId, 'comments'), {
         text: newComment,
-        createdBy: user.displayName || user.email, // Guardamos el nombre del usuario o el correo
+        createdBy: user.displayName || user.email, 
         createdAt: new Date(),
       });
       setNewComment('');
-      loadComments(); // Recargar los comentarios después de agregar uno nuevo
+      loadComments(); 
     } catch (error) {
       console.error('Error adding comment: ', error);
     }
