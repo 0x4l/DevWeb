@@ -1,78 +1,113 @@
+.new-thread-form {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.new-thread-form input, 
+.new-thread-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #218838;
+}
 
 
+.image-upload-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
 
 
-.forum {
-    padding: 20px;
-  }
-  
-  .new-thread-form {
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  }
-  
-  .new-thread-form h2 {
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .new-thread-form input, 
-  .new-thread-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-  
-  .submit-button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-  
-  .submit-button:hover {
-    background-color: #218838;
-  }
-  
-  .thread-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .thread-list h2 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .thread-card {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: left;
-  }
-  
-  .thread-card h3 {
-    margin-bottom: 10px;
-    color: #007bff;
-  }
-  
-  .thread-card p {
-    margin-bottom: 10px;
-    color: #555;
-  }
-  
-  .thread-card small {
-    color: #888;
-  }
+.image-upload-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.image-upload-button:hover {
+  background-color: #0056b3;
+}
+
+
+.image-upload-filename {
+  color: #555;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+
+.thread-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.thread-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.thread-card img.thread-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.thread-card h3 {
+  color: #007bff;
+}
+
+.thread-card small {
+  display: block;
+  color: #888;
+}
+
+
+.like-button-container {
+  margin-top: 10px;
+}
+
+
+.like-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #e0245e;
+  transition: transform 0.1s ease-in-out;
+}
+
+.like-button:hover {
+  transform: scale(1.2);
+}
+
+.like-button:active {
+  transform: scale(1.3);
+}
