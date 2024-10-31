@@ -1,9 +1,6 @@
-
-
-// src/components/Comments.js
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
-import { collection, addDoc, updateDoc, doc, query, onSnapshot, orderBy } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc, query, onSnapshot, orderBy, arrayUnion } from 'firebase/firestore';
 import './Comments.css';
 
 function Comments({ threadId, user }) {
@@ -12,7 +9,7 @@ function Comments({ threadId, user }) {
   const [showComments, setShowComments] = useState(false);
   const [mostLikedComment, setMostLikedComment] = useState(null);
 
-  // Cargar los comentarios de un hilo específico
+ 
   useEffect(() => {
     const q = query(
       collection(db, 'threads', threadId, 'comments'),
@@ -25,7 +22,7 @@ function Comments({ threadId, user }) {
       }));
       setComments(commentsData);
 
-      // Calcular el comentario con más corazones
+      
       const mostLiked = commentsData.reduce((prev, curr) => {
         return (prev.likes || 0) > (curr.likes || 0) ? prev : curr;
       }, {});
@@ -35,7 +32,7 @@ function Comments({ threadId, user }) {
     return () => unsubscribe();
   }, [threadId]);
 
-  // Manejar la adición de un nuevo comentario
+ 
   const handleAddComment = async (e) => {
     e.preventDefault();
     if (newComment.trim() === '') {
@@ -47,6 +44,7 @@ function Comments({ threadId, user }) {
       await addDoc(collection(db, 'threads', threadId, 'comments'), {
         text: newComment,
         likes: 0,
+        likedBy: [], 
         user: user ? user.email : 'Anon',
         createdAt: new Date(),
       });
@@ -56,17 +54,28 @@ function Comments({ threadId, user }) {
     }
   };
 
-  // Manejar el aumento de "me gusta" (corazones)
-  const handleLike = async (commentId, currentLikes) => {
+ 
+  const handleLike = async (commentId, currentLikes, likedBy) => {
+    if (!user) {
+      alert("Debes iniciar sesión para dar 'like'.");
+      return;
+    }
+    if (likedBy.includes(user.uid)) {
+      alert('Ya le has dado "like" a este comentario.');
+      return;
+    }
+
     const commentRef = doc(db, 'threads', threadId, 'comments', commentId);
-    await updateDoc(commentRef, { likes: currentLikes + 1 });
+    await updateDoc(commentRef, {
+      likes: currentLikes + 1,
+      likedBy: arrayUnion(user.uid),
+    });
   };
 
   return (
     <div className="comments">
       <h4>Comentarios</h4>
       {!showComments && mostLikedComment ? (
-        // Mostrar solo el comentario con más corazones si no se han desplegado los comentarios
         <div className="comment-card">
           <p>{mostLikedComment.text}</p>
           <small>Por: {mostLikedComment.user}</small>
@@ -79,7 +88,10 @@ function Comments({ threadId, user }) {
           <div className="comment-card" key={comment.id}>
             <p>{comment.text}</p>
             <small>Por: {comment.user}</small>
-            <button onClick={() => handleLike(comment.id, comment.likes || 0)}>
+            <button
+              onClick={() => handleLike(comment.id, comment.likes || 0, comment.likedBy || [])}
+              className="like-button"
+            >
               {comment.likes || 0} ❤️
             </button>
           </div>

@@ -1,7 +1,6 @@
-
-import React, { useState, useEffect, useRef } from 'react'; 
+import React, { useState, useEffect, useRef } from 'react';
 import { db, storage } from '../firebase';
-import { collection, addDoc, query, onSnapshot, orderBy, updateDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, query, onSnapshot, orderBy, updateDoc, doc, arrayUnion } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './Forum.css';
 import Comments from './Comments';
@@ -10,11 +9,10 @@ function Forum({ user }) {
   const [title, setTitle] = useState('');
   const [thread, setThread] = useState('');
   const [threads, setThreads] = useState([]);
-  const [image, setImage] = useState(null); 
-  const [loading, setLoading] = useState(false); 
-  const fileInputRef = useRef(); 
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const fileInputRef = useRef();
 
-  
   useEffect(() => {
     const q = query(collection(db, 'threads'), orderBy('createdAt', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -28,7 +26,6 @@ function Forum({ user }) {
     return () => unsubscribe();
   }, []);
 
-  
   const handleAddThread = async (e) => {
     e.preventDefault();
     if (title.trim() === '' || thread.trim() === '') {
@@ -36,52 +33,58 @@ function Forum({ user }) {
       return;
     }
 
-    setLoading(true); 
+    setLoading(true);
     let imageUrl = null;
 
     if (image) {
       try {
-        
         const imageRef = ref(storage, `images/${image.name}-${Date.now()}`);
         await uploadBytes(imageRef, image);
-        imageUrl = await getDownloadURL(imageRef); 
+        imageUrl = await getDownloadURL(imageRef);
       } catch (error) {
         console.error('Error al subir la imagen:', error);
-        setLoading(false); 
+        setLoading(false);
         return;
       }
     }
 
     try {
-      
       await addDoc(collection(db, 'threads'), {
         title,
         thread,
-        imageUrl, 
+        imageUrl,
         user: user ? user.email : 'Anon',
         createdAt: new Date(),
-        likes: 0, 
+        likes: 0,
+        likedBy: [], 
       });
 
       setTitle('');
       setThread('');
-      setImage(null); 
-      fileInputRef.current.value = ''; 
-      setLoading(false); 
+      setImage(null);
+      fileInputRef.current.value = '';
+      setLoading(false);
     } catch (error) {
       console.error('Error al crear el hilo:', error);
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
- 
-  const handleLikeThread = async (threadId, currentLikes) => {
-    const threadRef = doc(db, 'threads', threadId);
-    await updateDoc(threadRef, { likes: currentLikes + 1 });
-  };
+  const handleLikeThread = async (threadId, currentLikes, likedBy) => {
+    if (!user) {
+      alert("Debes iniciar sesión para dar 'like'.");
+      return;
+    }
+    if (likedBy.includes(user.uid)) {
+      alert('Ya le has dado "like" a este hilo.');
+      return;
+    }
 
-  const handleFileInputClick = () => {
-    fileInputRef.current.click(); 
+    const threadRef = doc(db, 'threads', threadId);
+    await updateDoc(threadRef, {
+      likes: currentLikes + 1,
+      likedBy: arrayUnion(user.uid),
+    });
   };
 
   return (
@@ -103,13 +106,11 @@ function Forum({ user }) {
               onChange={(e) => setThread(e.target.value)}
               required
             ></textarea>
-            
-            {}
             <div className="image-upload-container">
               <button
                 type="button"
                 className="image-upload-button"
-                onClick={handleFileInputClick}
+                onClick={() => fileInputRef.current.click()}
               >
                 Seleccionar imagen
               </button>
@@ -124,7 +125,6 @@ function Forum({ user }) {
                 accept="image/*"
               />
             </div>
-
             <button className="submit-button" type="submit" disabled={loading}>
               {loading ? 'Subiendo...' : 'Publicar hilo'}
             </button>
@@ -144,11 +144,10 @@ function Forum({ user }) {
               {thread.imageUrl && <img src={thread.imageUrl} alt="Contenido del hilo" className="thread-image" />}
               <small>Por: {thread.user}</small>
 
-              {}
               <div className="like-button-container">
                 <button
                   className="like-button"
-                  onClick={() => handleLikeThread(thread.id, thread.likes || 0)}
+                  onClick={() => handleLikeThread(thread.id, thread.likes || 0, thread.likedBy || [])}
                 >
                   {thread.likes || 0} ❤️
                 </button>
