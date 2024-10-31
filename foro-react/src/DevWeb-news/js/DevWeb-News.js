@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
         slideIndicator.textContent = `Imagen ${currentIndex + 1} de ${carouselItems.length}`;
     }
 
-    function showSlide(index) { 
+    function showSlide(index) {
         if (index < 0) {
             currentIndex = carouselItems.length - 1;
         } else if (index >= carouselItems.length) {
@@ -90,7 +90,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         carouselItems.forEach((item, idx) => {
-            item.style.display = idx === currentIndex ? "block" : "none";
+            item.style.opacity = idx === currentIndex ? "1" : "0";
+            item.style.zIndex = idx === currentIndex ? "1" : "0";
         });
 
         newsButtons.forEach((button, idx) => {
@@ -136,7 +137,6 @@ document.addEventListener("DOMContentLoaded", function () {
         startAutoSlide();
     });
 
-    // Detener y reanudar el auto-slide con hover
     carouselInner.addEventListener("mouseenter", stopAutoSlide);
     carouselInner.addEventListener("mouseleave", startAutoSlide);
 
