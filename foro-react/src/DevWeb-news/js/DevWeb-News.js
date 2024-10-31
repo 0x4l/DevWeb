@@ -90,6 +90,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         carouselItems.forEach((item, idx) => {
+            item.style.opacity = idx === currentIndex ? "1" : "0";
+            item.style.zIndex = idx === currentIndex ? "1" : "0";
             item.style.display = idx === currentIndex ? "block" : "none";
         });
 
@@ -143,5 +145,5 @@ document.addEventListener("DOMContentLoaded", function () {
     showSlide(currentIndex);
     startAutoSlide();
 
-    
+
 });

@@ -205,6 +205,8 @@ document.addEventListener("DOMContentLoaded", function () {
       currentIndex = index;
     }
     carouselItems.forEach(function (item, idx) {
+      item.style.opacity = idx === currentIndex ? "1" : "0";
+      item.style.zIndex = idx === currentIndex ? "1" : "0";
       item.style.display = idx === currentIndex ? "block" : "none";
     });
     newsButtons.forEach(function (button, idx) {
@@ -273,7 +275,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52675" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53440" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
