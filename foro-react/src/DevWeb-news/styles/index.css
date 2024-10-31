@@ -93,11 +93,13 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 0px;
+  width: 100%;
 }
 
 /* Recuadro para los botones con bordes redondeados y negros */
 .banner-buttons-container {
   width: 100%; /* Ocupa todo el ancho disponible */
+  margin-left: 15px;
 }
 
 /* Estilos para los botones */
@@ -129,48 +131,6 @@
   background-color: rgba(0, 128, 0, 0.2); /* Color al pasar mouse */
 }
 
-/* Estilos para el recuadro del buscador con borde negro */
-.search-box-container {
-  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
-  padding: 10px;
-  border-radius: 10px;
-  border: 2px solid #ccc; /* Borde gris claro */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-
-/* Ocultar el buscador inicialmente */
-.search-box {
-  display: none; /* Oculto inicialmente */
-  flex-direction: row;
-  transition: max-height 0.3s ease-in-out; /* Animación suave */
-  overflow: hidden; /* Evita que se muestre el contenido fuera de los límites */
-}
-
-.search-box.show {
-  display: flex; /* Mostrar cuando se activa */
-  max-height: 100px; /* Ajusta a un tamaño máximo */
-}
-
-
-.search-input {
-  border: 1px solid #007BFF; /* Borde azul */
-  padding: 10px;
-  border-radius: 20px; /* Bordes más redondeados */
-  outline: none;
-  width: 250px; /* Un poco más ancho */
-  transition: border-color 0.3s; /* Transición suave al enfocar */
-}
-
-.search-input:focus {
-  border-color: #0056b3; /* Color más oscuro al enfocar */
-}
-
-
 /* Estilos del botón de búsqueda */
 .search-button {
   background-color: transparent;
@@ -181,97 +141,84 @@
   position: relative;
 }
 
-.search-results {
-    position: relative; /* Para superponerse al carrusel */
-    z-index: 10; /* Asegurarse de que esté por encima */
-    background-color: white; /* Fondo blanco */
-    padding: 10px; /* Espaciado */
-    margin-bottom: 20px; /* Margen inferior */
+/* Estilos para el modal de búsqueda */
+.search-modal {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-
-/* Estilo para el título de novedades con efecto neón y animación de aparición */
-.novedades-carrusel h2 {
-  font-size: 3rem;
-  text-align: center;
-  margin-bottom: 20px;
-  color: rgba(0, 255, 153, 1); /* Color inicial que permite ver el efecto de neón */
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  position: relative;
-  opacity: 0; /* Comienza invisible para la animación de aparición */
-  animation: neon-flicker 1.5s infinite alternate, fadeIn 1s forwards; /* Combina ambas animaciones */
-}
-
-
-/* Animación de aparición */
-@keyframes fadeIn {
-  from {
-    opacity: 0; /* Comienza invisible */
-    transform: translateY(-20px); /* Se desplaza hacia arriba */
-  }
-  to {
-    opacity: 1; /* Se vuelve visible */
-    transform: translateY(0); /* Vuelve a la posición original */
-  }
-}
-
-/* Aplicar la animación de aparición al contenedor de novedades */
-.novedades-carrusel {
-  animation: fadeIn 1s forwards; /* Agrega la animación de aparición */
-  opacity: 0; /* Comienza invisible para la animación de aparición */
-}
-
-
-/* Aplicar la animación de aparición al contenedor de novedades */
-.novedades-carrusel {
-  animation: fadeIn 1s forwards; /* Agrega la animación de aparición */
-  opacity: 0; /* Comienza invisible para la animación de aparición */
-}
-
-/* Estilos de carrusel */
-.novedades-carrusel {
+.search-modal-content {
+  background-color: white;
   padding: 20px;
-  background-color: #f4f4f4;
-}
-
-
-
-.novedades-carrusel h2 {
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
   text-align: center;
-  margin-bottom: 20px;
-  animation: fadeIn 1s ease-in-out forwards;
-  opacity: 0; /* Comienza invisible */
 }
 
+.close-button {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#searchInput {
+  width: 95%;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#searchBtn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#searchResults {
+  margin-top: 20px;
+  text-align: left;
+}
+
+
+/* Carrusel */
 .carousel {
   position: relative;
-  width: 100%; /* Ocupa todo el ancho de la pantalla */
-  height: 200px; /* Ajusta esta altura según lo necesario */
+  width: 100%;
+  height: 200px;
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 1.5s ease-in-out forwards;
-  opacity: 0; /* Comienza invisible */
-  animation-delay: 0.5s; /* Retardo para que aparezca después del título */
 }
 
 .carousel-inner {
   display: flex;
-  transition: transform 0.3s ease-in-out; /* Reducción a 0.3s */
+  transition: transform 0.5s ease-in-out;
 }
 
 .carousel-item {
   min-width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
+  transition: opacity 0.5s ease-in-out;
 }
 
-.carousel img {
+.carousel-item img {
   width: 100%;
   height: 150px;
-  object-fit: cover; /* Asegura que las imágenes ocupen todo el espacio del carrusel */
-  object-position: center; /* Centra la imagen dentro del contenedor */
+  object-fit: cover;
+  object-position: center;
 }
 
 .carousel-button {
@@ -280,12 +227,10 @@
   transform: translateY(-50%);
   background-color: rgba(255, 255, 255, 0.7);
   border: none;
-  border-radius: 50%; /* Botones redondos */
+  border-radius: 50%;
   padding: 10px;
   cursor: pointer;
   font-size: 18px;
-  z-index: 1;
-  transition: background-color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
 }
 
 .prev {
@@ -296,12 +241,6 @@
   right: 10px;
 }
 
-/* Efecto al pasar el mouse */
-.carousel-button:hover {
-  background-color: rgba(0, 128, 0, 0.9); /* Cambia el color al pasar el mouse */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Aumenta la sombra */
-}
-
 .news-navigation {
   display: flex;
   justify-content: center;
@@ -309,20 +248,35 @@
 }
 
 .news-button {
-  background-color: #e0e0e0; /* Fondo claro */
+  background-color: #e0e0e0;
   border: none;
-  border-radius: 50%; /* Bordes redondeados */
-  width: 40px; /* Ajusta el tamaño */
-  height: 40px; /* Ajusta el tamaño */
-  margin: 0 5px; /* Espaciado entre botones */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
   cursor: pointer;
-  transition: background-color 0.3s; /* Transición suave */
-  font-size: 1.2rem; /* Tamaño del texto */
+  font-size: 1.2rem;
 }
 
 .news-button:hover {
-  background-color: rgba(0, 128, 0, 0.5); /* Color al pasar mouse */
+  background-color: rgba(0, 128, 0, 0.5);
 }
+
+/* Indicador de slide */
+.slide-indicator {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+
+
 
 /* Sección de noticias */
 .noticias {

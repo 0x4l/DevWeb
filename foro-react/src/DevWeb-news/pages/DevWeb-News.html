@@ -65,55 +65,44 @@
                     </li>
                 </ul>
             </div>
-            <!-- Recuadro con el buscador -->
-            <div class="search-box-container">
-                <form class="search-box">
-                    <input type="text" placeholder="Buscar..." class="search-input">
-                </form>
-            </div>
         </div>
     </header>
 
-
-    <!-- Sección de NOVEDADES Carrusel -->
-    <section class="novedades-carrusel" id="novedades-carrusel">
-        <h2>NOVEDADES</h2>
-        <div class="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="/foro-react/src/DevWeb-news/images/Carrusel/Evento 1/Photo + Text Page.png"
-                        alt="Evento 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="/foro-react/src/DevWeb-news/images/Carrusel/Evento 2/Photo + Text Page.png"
-                        alt="Evento 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="/foro-react/src/DevWeb-news/images/Carrusel/Evento 3/Banner Torneo de Boxeo Diseño Deportivo Atrevido Negro Rojo.png"
-                        alt="Evento 3">
-                </div>
-                <div class="carousel-item">
-                    <img src="/foro-react/src/DevWeb-news/images/Carrusel/Evento 4/Blue and White Futuristic AI Technology Banner.png"
-                        alt="Evento 4">
-                </div>
-                <div class="carousel-item">
-                    <img src="/foro-react/src/DevWeb-news/images/Carrusel/Evento 5/Purple & Black Retro Gaming Banner.png"
-                        alt="Evento 5">
-                </div>
+<!-- Sección de NOVEDADES Carrusel -->
+<section class="novedades-carrusel" id="novedades-carrusel">
+    <h2>NOVEDADES</h2>
+    <div class="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/foro-react/src/DevWeb-news/images/Carrusel/Evento 1/Photo + Text Page.png" alt="Evento 1">
             </div>
-            <button class="carousel-button prev" onclick="prevSlide()">&#10094;</button>
-            <button class="carousel-button next" onclick="nextSlide()">&#10095;</button>
+            <div class="carousel-item">
+                <img src="/foro-react/src/DevWeb-news/images/Carrusel/Evento 2/Photo + Text Page.png" alt="Evento 2">
+            </div>
+            <div class="carousel-item">
+                <img src="/foro-react/src/DevWeb-news/images/Carrusel/Evento 3/Banner Torneo de Boxeo Diseño Deportivo Atrevido Negro Rojo.png" alt="Evento 3">
+            </div>
+            <div class="carousel-item">
+                <img src="/foro-react/src/DevWeb-news/images/Carrusel/Evento 4/Blue and White Futuristic AI Technology Banner.png" alt="Evento 4">
+            </div>
+            <div class="carousel-item">
+                <img src="/foro-react/src/DevWeb-news/images/Carrusel/Evento 5/Purple & Black Retro Gaming Banner.png" alt="Evento 5">
+            </div>
         </div>
+        <button class="carousel-button prev" onclick="prevSlide()">&#10094;</button>
+        <button class="carousel-button next" onclick="nextSlide()">&#10095;</button>
+    </div>
 
-        <!-- Nuevos botones para cambiar de noticias -->
-        <div class="news-navigation">
-            <button class="news-button" onclick="showSlide(0)">1</button>
-            <button class="news-button" onclick="showSlide(1)">2</button>
-            <button class="news-button" onclick="showSlide(2)">3</button>
-            <button class="news-button" onclick="showSlide(3)">4</button>
-            <button class="news-button" onclick="showSlide(4)">5</button>
-        </div>
-    </section>
+    <!-- Botones de navegación para ir directamente a cada imagen -->
+    <div class="news-navigation">
+        <button class="news-button" onclick="showSlide(0)">1</button>
+        <button class="news-button" onclick="showSlide(1)">2</button>
+        <button class="news-button" onclick="showSlide(2)">3</button>
+        <button class="news-button" onclick="showSlide(3)">4</button>
+        <button class="news-button" onclick="showSlide(4)">5</button>
+    </div>
+</section>
+
     <!-- Sección de Noticias -->
     <section class="noticias" id="noticias">
         <h2>Últimas Noticias</h2>
@@ -145,6 +134,17 @@
                     </div>
                 </div>
             </div>
+
+<!-- Ventana emergente de búsqueda -->
+<div class="search-modal" id="searchModal">
+    <div class="search-modal-content">
+        <span class="close-button" id="closeSearch">&times;</span>
+        <input type="text" id="searchInput" placeholder="Buscar noticias...">
+        <button id="searchBtn">Buscar</button>
+        <div id="searchResults"></div> <!-- Div para mostrar los resultados de búsqueda -->
+    </div>
+</div>
+
 
             <!-- Espacio para la imagen -->
             <div class="image-container">
@@ -181,7 +181,7 @@
     </footer>
 
 
-    <script src="/foro-react/src/DevWeb-news/js/index.js"></script>
+    <script src="/foro-react/src/DevWeb-news/js/DevWeb-News.js"></script>
 </body>
 
 </html>
